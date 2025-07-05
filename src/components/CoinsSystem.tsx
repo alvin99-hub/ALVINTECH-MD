@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Coins, Gift, Calendar, Zap, Clock, Star, Trophy } from 'lucide-react';
+import BotManager from './BotManager';
 
 const CoinsSystem = () => {
   const [userCoins, setUserCoins] = useState(85);
   const [dailyClaimed, setDailyClaimed] = useState(false);
   const [timeUntilReset, setTimeUntilReset] = useState('');
   const [claimAnimation, setClaimAnimation] = useState(false);
+  const [showBotManager, setShowBotManager] = useState(false);
 
   useEffect(() => {
     // Calculate time until next reset (midnight)
@@ -54,7 +56,7 @@ const CoinsSystem = () => {
             <span className="text-purple-600">Coins</span> System
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto px-4">
-            Earn free coins daily and use them to deploy your WhatsApp bots. Only 10 coins per bot deployment!
+            Earn free coins daily and use them to deploy your WhatsApp bots. Only 10 coins per bot deployment with auto-renewal!
           </p>
         </div>
 
@@ -104,11 +106,95 @@ const CoinsSystem = () => {
                 </div>
                 <h3 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Bot Deployment</h3>
                 <div className="text-2xl sm:text-3xl font-bold text-blue-600 mb-2">10 Coins</div>
-                <p className="text-gray-600 text-sm sm:text-base">per deployment</p>
+                <p className="text-gray-600 text-sm sm:text-base">per 24 hours</p>
                 <div className="mt-2 text-sm text-green-600 font-medium">
                   You can deploy {Math.floor(userCoins / 10)} bots
                 </div>
               </div>
+            </div>
+
+            {/* Bot Manager Button */}
+            <div className="mt-6 text-center">
+              <button
+                onClick={() => setShowBotManager(!showBotManager)}
+                className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors font-semibold flex items-center space-x-2 mx-auto"
+              >
+                <Zap className="h-5 w-5" />
+                <span>{showBotManager ? 'Hide' : 'Manage'} Active Bots</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bot Manager */}
+        {showBotManager && (
+          <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+            <BotManager userCoins={userCoins} onCoinsUpdate={setUserCoins} />
+          </div>
+        )}
+
+        {/* Auto-Renewal Info */}
+        <div className="max-w-4xl mx-auto mb-12 sm:mb-16">
+          <div className="bg-white rounded-2xl shadow-lg p-6 sm:p-8 lg:p-10">
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-8 text-center">
+              <span className="text-green-600">Auto-Renewal</span> System
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full mb-4">
+                  <Clock className="h-6 w-6 sm:h-8 sm:w-8 text-green-600" />
+                </div>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">24-Hour Cycles</h4>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  Bots automatically renew every 24 hours when auto-renewal is enabled.
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full mb-4">
+                  <Coins className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+                </div>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Smart Coin Usage</h4>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  Only renews if you have sufficient coins. No surprise charges.
+                </p>
+              </div>
+              
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-full mb-4">
+                  <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
+                </div>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Continuous Operation</h4>
+                <p className="text-gray-600 text-sm sm:text-base">
+                  Keep your bots running 24/7 without manual intervention.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-8 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6">
+              <h4 className="font-semibold text-gray-900 mb-3 flex items-center">
+                <Zap className="h-5 w-5 text-green-600 mr-2" />
+                How Auto-Renewal Works:
+              </h4>
+              <ol className="text-gray-700 space-y-2 text-sm sm:text-base">
+                <li className="flex items-start">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">1</span>
+                  Bot expires after 24 hours of deployment
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">2</span>
+                  System checks if auto-renewal is enabled and coins are available
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">3</span>
+                  If conditions are met, 10 coins are deducted and bot gets 24 more hours
+                </li>
+                <li className="flex items-start">
+                  <span className="bg-green-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs mr-3 mt-0.5 flex-shrink-0">4</span>
+                  You receive a notification confirming the renewal or failure
+                </li>
+              </ol>
             </div>
           </div>
         </div>
@@ -119,7 +205,7 @@ const CoinsSystem = () => {
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
               Need More <span className="text-purple-600">Coins</span>?
             </h3>
-            <p className="text-gray-600 text-sm sm:text-base">Purchase coin packages to deploy more bots instantly</p>
+            <p className="text-gray-600 text-sm sm:text-base">Purchase coin packages to ensure your bots never stop running</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -145,8 +231,11 @@ const CoinsSystem = () => {
                   </div>
                   <div className="text-sm text-gray-600 mb-4">+ {pkg.bonus} bonus coins</div>
                   <div className="text-xl sm:text-2xl font-bold text-gray-900 mb-4">{pkg.price}</div>
-                  <div className="text-sm text-gray-600 mb-6">
+                  <div className="text-sm text-gray-600 mb-2">
                     {Math.floor((pkg.amount + pkg.bonus) / 10)} bot deployments
+                  </div>
+                  <div className="text-xs text-green-600 mb-6">
+                    ~{Math.floor((pkg.amount + pkg.bonus) / 10)} days of auto-renewal
                   </div>
                   <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 text-sm sm:text-base ${
                     pkg.popular 
@@ -183,9 +272,9 @@ const CoinsSystem = () => {
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full mb-4">
                   <Zap className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
                 </div>
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Deploy Bots</h4>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Deploy & Renew</h4>
                 <p className="text-gray-600 text-sm sm:text-base">
-                  Use 10 coins to deploy any WhatsApp bot for 24 hours.
+                  Use 10 coins to deploy any WhatsApp bot for 24 hours with auto-renewal.
                 </p>
               </div>
               
