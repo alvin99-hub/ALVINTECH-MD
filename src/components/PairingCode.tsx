@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Smartphone, Copy, CheckCircle, AlertCircle, Wifi, MessageCircle, Bot, QrCode } from 'lucide-react';
+import { Smartphone, Copy, CheckCircle, AlertCircle, Wifi, MessageCircle, Bot, QrCode, Volume2 } from 'lucide-react';
 
 const PairingCode = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -9,6 +9,7 @@ const PairingCode = () => {
   const [isConnected, setIsConnected] = useState(false);
   const [copied, setCopied] = useState(false);
   const [connectionMessage, setConnectionMessage] = useState('');
+  const [notificationSent, setNotificationSent] = useState(false);
 
   const botTypes = [
     {
@@ -40,6 +41,7 @@ const PairingCode = () => {
     setIsGenerating(true);
     setIsConnected(false);
     setConnectionMessage('');
+    setNotificationSent(false);
     
     // Simulate code generation
     setTimeout(() => {
@@ -52,8 +54,47 @@ const PairingCode = () => {
         const selectedBotName = botTypes.find(bot => bot.id === selectedBot)?.name || 'ALVIN-MD';
         setIsConnected(true);
         setConnectionMessage(`✅ ${selectedBotName} successfully connected to ${phoneNumber}`);
+        
+        // Send notification audio message
+        sendNotificationMessage();
       }, 8000);
     }, 2000);
+  };
+
+  const sendNotificationMessage = () => {
+    // Play notification sound
+    playNotificationSound();
+    
+    // Simulate sending WhatsApp notification
+    setTimeout(() => {
+      setNotificationSent(true);
+    }, 1000);
+  };
+
+  const playNotificationSound = () => {
+    // Create audio context for notification sound
+    const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+    
+    // Create a more complex notification sound
+    const playTone = (frequency: number, startTime: number, duration: number) => {
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.setValueAtTime(frequency, audioContext.currentTime + startTime);
+      gainNode.gain.setValueAtTime(0.3, audioContext.currentTime + startTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + startTime + duration);
+      
+      oscillator.start(audioContext.currentTime + startTime);
+      oscillator.stop(audioContext.currentTime + startTime + duration);
+    };
+
+    // Play notification melody
+    playTone(800, 0, 0.2);
+    playTone(1000, 0.3, 0.2);
+    playTone(800, 0.6, 0.3);
   };
 
   const copyToClipboard = async () => {
@@ -80,6 +121,7 @@ const PairingCode = () => {
     setIsConnected(false);
     setConnectionMessage('');
     setCopied(false);
+    setNotificationSent(false);
   };
 
   return (
@@ -251,6 +293,24 @@ const PairingCode = () => {
                         <Bot className="h-4 w-4" />
                         <span>Your bot is now active and ready to use!</span>
                       </div>
+                      
+                      {notificationSent && (
+                        <div className="mt-3 bg-white border border-green-300 rounded-lg p-3">
+                          <div className="flex items-center mb-2">
+                            <Volume2 className="h-4 w-4 text-green-600 mr-2" />
+                            <span className="font-medium text-green-900">Notification Sent</span>
+                          </div>
+                          <div className="bg-gray-50 rounded p-2 text-sm">
+                            <div className="font-mono text-green-700">
+                              🔊 "ALVINTECH-MD BOT IS CONNECTED SUCCESSFULLY. PLAY YOUR PART NOW."
+                            </div>
+                          </div>
+                          <p className="text-xs text-green-600 mt-1">
+                            Audio message sent to your WhatsApp inbox
+                          </p>
+                        </div>
+                      )}
+                      
                       <button
                         onClick={resetForm}
                         className="mt-3 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm font-semibold"
@@ -271,6 +331,7 @@ const PairingCode = () => {
                           <li>• Don't share this code with anyone</li>
                           <li>• Only use on your own WhatsApp account</li>
                           <li>• Generate a new code if connection fails</li>
+                          <li>• Audio notification will confirm connection</li>
                         </ul>
                       </div>
                     </div>
@@ -311,11 +372,11 @@ const PairingCode = () => {
               
               <div className="text-center">
                 <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 bg-purple-100 rounded-full mb-4">
-                  <Bot className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
+                  <Volume2 className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
                 </div>
-                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Instant Activation</h4>
+                <h4 className="text-lg sm:text-xl font-semibold text-gray-900 mb-3">Audio Confirmation</h4>
                 <p className="text-gray-600 text-sm sm:text-base">
-                  Your ALVIN-MD bot becomes active immediately after successful pairing.
+                  Receive an audio message confirming successful bot connection.
                 </p>
               </div>
             </div>
