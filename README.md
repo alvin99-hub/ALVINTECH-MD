@@ -21,7 +21,7 @@ ALVINTECH-MD
 
 ### 🚀 Deploy or Pair Session
 
-[![GET SESSION](https://img.shields.io/badge/GET%20SESSION-007aff?style=for-the-badge&logo=whatsapp&logoColor=white)](https://alvintech.netlify.app)
+[![GET SESSION](https://www.ibrahimadams.site/scanner)
 
 ---
 
