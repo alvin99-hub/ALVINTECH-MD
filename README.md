@@ -17,7 +17,7 @@
 
 [![WhatsApp Help](https://img.shields.io/badge/WhatsApp_Help-25D366?style=for-the-badge&logo=whatsapp&logoColor=white)](https://wa.me/254742943705)
 
----
+
 
 ### 🚀 Deploy or Pair Session
 
@@ -25,7 +25,7 @@
 
 [![Scan QR Code](https://img.shields.io/badge/SCAN_QR-Pair_Session_ID-1f1f1f?style=for-the-badge&logo=whatsapp&logoColor=25D366)](https://www.ibrahimadams.site/scanner)
 
----### 🚀 Deploy on Railway
+### 🚀 Deploy on Railways
 
 Want to host your bot with 1-click deploy magic?
 
