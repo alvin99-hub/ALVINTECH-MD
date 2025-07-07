@@ -21,7 +21,9 @@ ALVINTECH-MD
 
 ### 🚀 Deploy or Pair Session
 
-[![GET SESSION](https://www.ibrahimadams.site/scanner)
+### 🔗 Pair Session ID
+
+[![Scan QR Code](https://img.shields.io/badge/SCAN_QR-Pair_Session_ID-1f1f1f?style=for-the-badge&logo=whatsapp&logoColor=25D366)](https://www.ibrahimadams.site/scanner)
 
 ---
 
