@@ -25,7 +25,11 @@ ALVINTECH-MD
 
 [![Scan QR Code](https://img.shields.io/badge/SCAN_QR-Pair_Session_ID-1f1f1f?style=for-the-badge&logo=whatsapp&logoColor=25D366)](https://www.ibrahimadams.site/scanner)
 
----
+---### 🚀 Deploy on Railway
+
+Want to host your bot with 1-click deploy magic?
+
+[![Deploy on Railway](https://img.shields.io/badge/RAILWAY-Deploy_App-0b0b0b?style=for-the-badge&logo=railway&logoColor=white)](https://railway.app/?referralCode=AqkNn4)
 
 ### 🔗 Follow & Support
 
