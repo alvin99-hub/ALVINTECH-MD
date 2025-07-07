@@ -1,4 +1,4 @@
-ALVINTECH-MD
+![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=500&color=25D366&background=00000000&center=true&vCenter=true&width=600&lines=🤖+ALVINTECH-MD+Bot+Dashboard;Built+by+AlvinSirengo+🧠;Session+Pairing+%7C+Coin+System+%7C+Auto+Bot+Tasks;Let's+automate+WhatsApp+together+🚀)
 # 🤖 ALVIN-MD BOT
 
 ![ALVIN MD BANNER](https://raw.githubusercontent.com/alvin99-hub/ALVINTECH-MD/main/banner.png)
